@@ -1,0 +1,21 @@
+def hIndex(citations: list[int]) -> int:
+    n = len(citations)
+    paper_counts = [0] * (n+1)
+    
+    for c in citations:
+        paper_counts[min(n, c)] += 1
+
+    h = n
+    papers = paper_counts[n]
+
+    while papers < h:
+        h -= 1
+        papers += paper_counts[h]
+        
+    return h
+
+# TC = O(n), SC = O(n)
+
+
+print(hIndex(citations = [3,0,6,1,5]))
+print(hIndex(citations = [1,3,1]))
